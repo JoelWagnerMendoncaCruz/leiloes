@@ -29,5 +29,14 @@ public class conectaDAO {
             return null;
         }
     }
+        public void disconnectDB() {
+        try {
+            Connection conn = null;
+            conn.close();
+        } catch (SQLException e) {
+
+        }
+    }
+    }
     
-}
+
