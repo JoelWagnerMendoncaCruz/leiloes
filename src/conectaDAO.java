@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 import javax.swing.JOptionPane;
 
 
@@ -21,14 +22,17 @@ public class conectaDAO {
        
         Connection conn = null;
 
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11", "root", "administrador");
-            return conn;
-        } catch (Exception e) {
-            System.out.println("Erro ao conectar: " + e.getMessage());
-            return null;
+       try {
+            Properties properties = new Properties();
+            properties.setProperty("user", "root");
+            properties.setProperty("password", "administrador");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11?allowPublicKeyRetrieval=true&useSSL=false", properties);
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
         }
+        return conn;
     }
+    
         public void disconnectDB() {
         try {
             Connection conn = null;
